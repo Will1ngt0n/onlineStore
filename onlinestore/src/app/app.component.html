@@ -1,0 +1,130 @@
+<div id="container" class="dividers">
+
+  <!--                                         THIS IS THE HEADER                                          -->
+  <div id="header" class="dividers">
+    <h1>{{less}}</h1> <span>All Things Digital</span>
+  </div>
+  <div class="dividers" id="nav">
+    <mat-list>
+      <mat-list-item><a href="">Pepper</a>  </mat-list-item>
+      <mat-list-item><a href="">Salt</a> </mat-list-item>
+      <mat-list-item><a href="">Paprika</a>  </mat-list-item>
+     </mat-list> 
+  </div>
+
+  <!--                                        THIS IS THE MAIN CONTENT                                      -->
+  <div class="dividers" id="content">
+   
+     <mat-grid-list  cols="4" rowHeight="3:5" style="margin-bottom: 2px; margin-top: 2px;" >
+        <mat-grid-tile *ngFor="let product of products">
+
+       <mat-card class="example-card">
+          <mat-card-header>
+              <mat-card-title>
+                <h3>{{product.name}}</h3>
+              </mat-card-title>
+          </mat-card-header>
+          <mat-card>
+            <img class="loadImage" [src]="product.pic">
+          </mat-card>
+        
+          <mat-card-content>
+            <h4 id="top">Description:</h4><span>{{product.description}}</span><br/>
+            <h4>Price: </h4>R<span>{{product.price}}</span>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button (click)="addToCart(product);">Add to cart</button>
+          </mat-card-actions>
+        </mat-card>
+
+      </mat-grid-tile>
+    </mat-grid-list  >
+
+
+
+
+
+
+    <div *ngIf="!arrayExist">
+      <h2>No items in your cart</h2>
+      Start shopping, go to top
+    </div>
+
+     <div *ngFor="let cartItems of cart">
+        <img class="loadImage" [src] =cartItems.cartPic>
+        <div>{{cartItems.cartName}}</div>
+        <div>{{cartItems.cartDescription}}</div>
+        <div>R{{cartItems.cartPrice}}</div>
+        <div>{{cartItems.cartQuantity}}</div>
+        <div>R{{cartItems.cartOverallPrice}}</div>
+        <div>
+          <button style="padding:0; width: 25px; height: 25px;" (click)="minus(cartItems);"><</button>
+         
+         
+         <!--
+
+          <input type="text" style="height:21px; padding: 0;" [value]="cartItems.cartQuantity"  (focus)="changeQuantity(cartItems)" [(ngModel)]="qty">
+         --> 
+          <button style="padding:0; width: 25px; height: 25px;" (click)="add(cartItems);">></button>
+
+
+        </div>
+        <button mat-button (click)="removeFromCart(cartItems);">Remove from cart</button>
+        
+
+        
+        <!--   
+
+          <div>{{cartItems.cart.cartOverallPrice}}</div>
+        -->
+        <h4>Total: R{{cartItems.total}}</h4>
+
+     </div>
+     <div>
+       <h4>Total: R{{total}}</h4>
+     </div>
+
+
+
+
+
+
+
+
+
+
+     
+  
+
+
+  </div>
+
+  <!--                                           THIS IS THE FOOTER                                          -->
+  <div class="dividers" id="footer">
+    <div class="footer" id="leftDiv">
+      <mat-list>
+        <h3>Where we are located</h3>
+        <mat-list-item><a href="">Gauteng</a>  </mat-list-item>
+        <mat-list-item><a href="">Mpumalanga</a> </mat-list-item>
+        <mat-list-item><a href="">North West</a>  </mat-list-item>
+       </mat-list> 
+    </div>
+    <div class="footer" id="middleDiv">
+      <mat-list>
+        <h3>On fire deals</h3>
+        <mat-list-item><a href="">Most bought</a></mat-list-item>
+        <mat-list-item><a href="">Big savings</a></mat-list-item>
+       </mat-list> 
+    </div>
+    <div class="footer" id="rightDiv">
+      <mat-list>
+        <h3>Contact us</h3>
+        <mat-list-item><a href="">E-mail: less@lessstores.com</a>  </mat-list-item>
+        <mat-list-item><a href="">Telephone: (011) 555 6987</a> </mat-list-item>
+        <mat-list-item><a href="">Facebook</a>  </mat-list-item>
+       </mat-list> 
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
