@@ -67,6 +67,11 @@ newOverallPrice: number= 0;
   for (i = 0; i<this.cart.length; i++){
     if(product.name == this.cart[i].cartName){
       alert("")
+      this.cart[i].cartQuantity++
+      this.cart[i].cartOverallPrice = Number(this.cart[i].cartPrice*this.cart[i].cartQuantity)
+      let totals: number =Number(product.price)
+    this.total = this.total + totals
+    this.numItems = this.numItems + this.newQuantity
       return null
     }
   }
