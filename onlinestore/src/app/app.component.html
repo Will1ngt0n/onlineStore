@@ -9,31 +9,38 @@
       <mat-list-item><a href=""></a>  </mat-list-item>
       <mat-list-item><a href=""></a> </mat-list-item>
       <mat-list-item><a href=""></a>  </mat-list-item>
+      <mat-list-item><button mat-button id="cart">Cart</button></mat-list-item>
      </mat-list> 
   </div>
 
   <!--                                        THIS IS THE MAIN CONTENT                                      -->
   <div class="dividers" id="content">
    
-     <mat-grid-list  cols="4" rowHeight="3:5" style="margin-bottom: 2px; margin-top: 2px;" >
+     <mat-grid-list  cols="4" rowHeight="3:4" style="margin-bottom: 2px; margin-top: 2px; padding-top: 0;" >
         <mat-grid-tile *ngFor="let product of products">
 
-       <mat-card class="example-card">
+       <mat-card id="items" class="example-card">
           <mat-card-header>
               <mat-card-title>
                 <h3>{{product.name}}</h3>
               </mat-card-title>
           </mat-card-header>
-          <mat-card>
-            <img class="loadImage" [src]="product.pic">
-          </mat-card>
+          <div id="saleItems">
+            <div id="saleImg">
+              <img class="loadImage" [src]="product.pic">
+            </div>
+            
+          </div>
+            
         
           <mat-card-content>
-            <h4 id="top">Description:</h4><span>{{product.description}}</span><br/>
+           <!--<h4 id="top">Description:</h4><span>{{product.description}}</span><br/> --> 
             <h4>Price: </h4>R<span>{{product.price}}</span>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button (click)="addToCart(product);">Add to cart</button>
+              <div class="example-button-row">
+                <button [id]="buttonDisabledID" mat-button (click)="addToCart(product);">Add to cart</button>
+              </div>
           </mat-card-actions>
         </mat-card>
 
@@ -43,29 +50,38 @@
 
 
 
-
-
-    <div *ngIf="!arrayExist">
+<!--                      This is the cart                           -->
+<div id="slider">
+  <div *ngIf="!arrayExist">
       <h2>No items in your cart</h2>
       Start shopping, go to top
     </div>
-
+    <mat-grid-list  cols="4" rowHeight="3:4">
+      
+    </mat-grid-list>
      <div *ngFor="let cartItems of cart">
-        <img class="loadImage" [src] =cartItems.cartPic>
-        <div>{{cartItems.cartName}}</div>
-        <div>{{cartItems.cartDescription}}</div>
-        <div>R{{cartItems.cartPrice}}</div>
-        <div>{{cartItems.cartQuantity}}</div>
-        <div>R{{cartItems.cartOverallPrice}}</div>
+        <!--                           Image divider                          -->
+       <div id="image">
+         <img class="loadImage" [src] =cartItems.cartPic>
+       </div>
+        
+        <div><h4>{{cartItems.cartName}}</h4></div>
+
+        <!-- Hiding the description-->
+        <!--<div>{{cartItems.cartDescription}}</div> --> 
+        <div> Price: R{{cartItems.cartPrice}}</div>
+        <div>Quantity: {{cartItems.cartQuantity}}</div>
+        <div>Total price: R{{cartItems.cartOverallPrice}}</div>
+        <div><span id="alertText">dvsdx</span></div>
         <div>
-          <button style="padding:0; width: 25px; height: 25px;" (click)="minus(cartItems);"><</button>
+          <button style="padding:0; width: 25px; height: 25px;" (click)="minus(cartItems);">&lt;</button>
          
          
          <!--
 
           <input type="text" style="height:21px; padding: 0;" [value]="cartItems.cartQuantity"  (focus)="changeQuantity(cartItems)" [(ngModel)]="qty">
          --> 
-          <button style="padding:0; width: 25px; height: 25px;" (click)="add(cartItems);">></button>
+          <button style="padding:0; width: 25px; height: 25px;" (click)="add(cartItems);">&gt;</button>
 
 
         </div>
@@ -81,8 +97,11 @@
 
      </div>
      <div>
-       <h4>Total: R{{total}}</h4>
+       <h4>Total Items: {{numItems}}</h4>
+       <h4>Total price: R{{total}}</h4>
      </div>
+</div>
+    
 
 
 

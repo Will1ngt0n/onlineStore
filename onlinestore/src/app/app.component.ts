@@ -26,8 +26,11 @@ newPrice: number = 0;
 newQuantity: number = 1;
 newOverallPrice: number= 0;
   cart =[];
-  total = 0;
+  total: number = 0;
   cartTotal: number = 0;
+  numItems: number = 0;
+
+  buttonDisabledID: number = 0
  /** images: ImageData = []*/ 
  
   
@@ -37,6 +40,18 @@ newOverallPrice: number= 0;
   removeFromCart(cartItems){
     let index = this.cart.indexOf(cartItems);
     this.cart.splice(index,1);
+
+    if(this.cart.length<1){
+      this.arrayExist = false;
+    }
+    this.total = 0;
+    this.numItems =0;
+    let i = 0;
+    for (i=0; i<this.cart.length;i++){
+      
+      this.total =this.total + Number(this.cart[i].cartOverallPrice)
+      this.numItems=this.numItems + Number(this.cart[i].cartQuantity)
+    }
   }
 
 
@@ -48,15 +63,24 @@ newOverallPrice: number= 0;
     this.newQuantity = 1;
   this.newOverallPrice = this.newQuantity*this.newPrice;
   
- 
-   
-    
-
+  let i: number =0;
+  for (i = 0; i<this.cart.length; i++){
+    if(product.name == this.cart[i].cartName){
+      alert("")
+      return null
+    }
+  }
     this.cart.push({cartPic: this.newPic, cartDescription:this.newDescription, cartName: this.newName, cartPrice: this.newPrice, cartQuantity: this.newQuantity, cartOverallPrice: this.newOverallPrice});
     this.arrayExist = true;
     this.cartTotal = Number(this.cartTotal)+Number(product.cartOverallPrice)
 
-    let total: number = 500
+
+
+    let totals: number =Number(product.price)
+    this.total = this.total + totals
+    this.numItems = this.numItems + this.newQuantity
+
+   
   }
 
   changeQuantity(cartItems){
@@ -73,26 +97,43 @@ newOverallPrice: number= 0;
   }
 
   minus(cartItems){
+    let alertText: string =""
     let mQuantity =  cartItems.cartQuantity;
     mQuantity=mQuantity -1;
-    cartItems.cartQuantity = mQuantity;
+    if(mQuantity>0){
+      cartItems.cartQuantity = mQuantity;
+    } else {
+      document.getElementById("alertText").innerHTML = "You cant have less than 1 items, click button below to remove from cart"
+    }
+    
 
     cartItems.cartOverallPrice = cartItems.cartQuantity*cartItems.cartPrice;
-
-    let total: number = 0;
-
-    total =  cartItems.cartPrice;
+    this.total= 0;
+    this.numItems = 0
+    let i = 0;
+    for (i=0; i<this.cart.length;i++){
+      
+      this.total =this.total + Number(this.cart[i].cartOverallPrice)
+      this.numItems=this.numItems + Number(this.cart[i].cartQuantity)
+    }
     
   }
 
   add(cartItems){
-  
+    document.getElementById("alertText").innerHTML = ""
     let mQuantity =  cartItems.cartQuantity;
     mQuantity=mQuantity +1;
     cartItems.cartQuantity = mQuantity;
   
     cartItems.cartOverallPrice = cartItems.cartQuantity*cartItems.cartPrice;
 
+    this.total = 0;
+    this.numItems =0;
+    let i = 0;
+    for (i=0; i<this.cart.length;i++){
+      this.total =this.total + Number(this.cart[i].cartOverallPrice)
+      this.numItems=this.numItems + Number(this.cart[i].cartQuantity)
+    }
 
 
    

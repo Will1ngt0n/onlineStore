@@ -5,12 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 /** Added by me */
-import {MatListModule} from '@angular/material/list';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { FormsModule } from '@angular/forms';
+/** All in one */
+import {MatButtonModule, MatCardModule, MatListModule, MatGridListModule} from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -21,15 +20,19 @@ import {MatGridListModule} from '@angular/material/grid-list';
 
 
     /** Added by me */
+    BrowserAnimationsModule,
     MatListModule,
     MatButtonModule,
     MatCardModule,
     FormsModule,
-    BrowserAnimationsModule,
+    
     MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
+
+
 export class AppModule { }
 export class PizzaPartyAppModule {}
